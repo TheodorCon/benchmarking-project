@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo modprobe msr
+sudo chmod o+rw /dev/cpu/0/msr
+sudo setcap cap_sys_rawio+ep ~/repos/rapl-tools/ProcessBenchmark

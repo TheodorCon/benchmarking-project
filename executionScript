@@ -1,0 +1,32 @@
+#!/bin/bash
+
+iterations=100
+
+haskellBenchmark=/haskell/benchmark/path
+cppBenchmark=/cpp/benchmark/path
+fsharpBenchmark=/fsharp/benchmark/path
+csharpBenchmark=/csharp/benchmark/path
+
+normalArguments=(1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35)
+largeArguments=(40 45 50 60 70 80 90 100 150 200 250 300 400 500 750 1000 1250 1500 2000 2500 3000 3500 4000 4500 5000 5500 6000 6500 7000 7500 8000 8500 9000 9500 10000)
+
+benchmarks=($haskellBenchmark $cppBenchmark $fsharpBenchmark $csharpBenchmark)
+
+normalVariants=(norm tail memo)
+largeVariants=(tail memo)
+
+for index in "${normalArguments[@]}"; do
+    for benchamark in "${benchmarks[@]}"; do
+        for variant in "${normalVariants[@]}"; do
+            ProcessBenchmark -i $iterations $benchamark $index $variant
+        done
+    done
+done
+
+for index in "${largeArguments[@]}"; do
+    for benchamark in "${benchmarks[@]}"; do
+        for variant in "${largeVariants[@]}"; do
+            ProcessBenchmark -i $iterations $benchamark $index $variant
+        done
+    done
+done
